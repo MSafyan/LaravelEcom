@@ -29,12 +29,13 @@
         <a href="index.html" class="btn btn-add">Back to Dashboard</a>
       </div>
       <div class="container-center">
+
         @if(Session::has('flash_message_error'))
         <div class="alert alert-sm alert-danger alert-block">
           <button class="close" type="button" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <strong>[!! session('flash_message_error') !!]</strong>
+          <strong>{{!! session('flash_message_error') !!}}</strong>
         </div>
         @endif
             
@@ -45,7 +46,7 @@
           <button class="close" type="button" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <strong>[!! session('flash_message_success') !!]</strong>
+          <strong>{{!! session('flash_message_success') !!}}</strong>
         </div>
         @endif
 
@@ -76,7 +77,7 @@
               </div>
               <div>
                 <button class="btn btn-add">Login</button>
-                <a class="btn btn-warning" href="register.html">Register</a>
+                <a class="btn btn-warning" href="register">Register</a>
               </div>
             </form>
             </div>
