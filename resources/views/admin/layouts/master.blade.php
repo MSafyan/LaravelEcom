@@ -189,16 +189,17 @@
       <script>
           $(document).ready(function(){
             $('#table_id').DataTable();
+            //Product Status
             $(".ProductStatus").change(function(){
               var id = $(this).attr('rel');
 
-              if(($this).prop("checked")==true){
+              if($(this).prop("checked")==true){
                 $.ajax({
                   headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                   },
                   type:'post',
-                  url:'/admin/update-product-success',
+                  url:'/admin/update-product-status',
                   data: {status:'1',id:id},
                   success:function(data){
                     $("#message_success").show();
@@ -215,7 +216,47 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                   },
                   type:'post',
-                  url:'/admin/update-product-success',
+                  url:'/admin/update-product-status',
+                  data: {status:'0',id:id},
+                  success:function(resp){
+                    $("#message_error").show();
+                    setTimeout(function(){
+                      $("#message_error").fadeout('slow');
+                    },2000);
+                  },error:function(){
+                    alert("Error")
+                  }
+                });
+              }
+            })
+            //Category Status
+            $(".CategoryStatus").change(function(){
+              var id = $(this).attr('rel');
+
+              if($(this).prop("checked")==true){
+                $.ajax({
+                  headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  },
+                  type:'post',
+                  url:'/admin/update-category-status',
+                  data: {status:'1',id:id},
+                  success:function(data){
+                    $("#message_success").show();
+                    setTimeout(function(){
+                      $("#message_success").fadeout('slow');
+                    },2000);
+                  },error:function(){
+                    alert("Error")
+                  }
+                });
+              }else{
+                $.ajax({
+                  headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  },
+                  type:'post',
+                  url:'/admin/update-category-status',
                   data: {status:'0',id:id},
                   success:function(resp){
                     $("#message_error").show();

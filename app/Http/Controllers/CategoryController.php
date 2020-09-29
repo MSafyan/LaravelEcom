@@ -49,8 +49,12 @@ class CategoryController extends Controller
   }
 
   public function deleteCategory($id=null){
-    Category::where(["id"])->delete();
+    Category::where(["id"=>$id])->delete();
     Alert::Success('Deleted',"Success Message");
     return redirect()->back();
+  }
+  public function updateStatus(Request $request,$id=null){
+    $data = $request()->all();
+    Category::where('id',$data['id'])->update(['status'=>$data['status']]);
   }
 }

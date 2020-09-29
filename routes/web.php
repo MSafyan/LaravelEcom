@@ -26,6 +26,8 @@ Route::match(['get','post'],'/admin/add-category','CategoryController@addCategor
 Route::match(['get','post'],'/admin/view-categories','CategoryController@viewCategories');
 Route::match(['get','post'],'/admin/edit-category/{id}','CategoryController@editCategory');
 Route::match(['get','post'],'/admin/delete-category/{id}','CategoryController@deleteCategory');
+  Route::post('/admin/update-category-status','CategoryController@updateStatus');
+
 
 
 
@@ -36,6 +38,9 @@ Route::match(['get','post'],'/admin/delete-category/{id}','CategoryController@de
   Route::match(['get','post'],'/admin/edit-product/{id}','ProductsController@editProduct');
   Route::match(['get','post'],'/admin/delete-product/{id}','ProductsController@deleteProduct');
   Route::post('/admin/update-product-status','ProductsController@updateStatus');
+
+  //Banners Route
+  Route::post('/admin/banners','BannerssController@banners');
 
 });
 

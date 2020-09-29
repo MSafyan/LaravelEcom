@@ -79,12 +79,15 @@
                                 </td>
                                 <td>{{$category->parent_id}}</td>
                                 <td>{{$category->url}}</td>
-                                <td>{{$category->status}}</td>
+                                <td>
+                                 <input type="checkbox" class="CategoryStatus btn btn-success" rel="{{$category->id}}" data-toggle="toggle" data-on="Enabled" data-of="Disabled" data-onstyle="success"data-offstyle="danger" @if($category['status']=="1") checked @endif>
+                                <div id="myElem" style="display:none;" class="alert alert-success">Status Enabled</div>
+                                </td>
                               
                                 <td>
                                     <a href="{{url('/admin/edit-category/'.$category->id)}}"
                                     class="btn btn-add btn-sm" ><i class="fa fa-pencil"></i></a>
-                                    <a href="{{url('/admin/delete-product/'.$category->id)}}" class="btn btn-danger btn-sm" ><i class="fa fa-trash-o"></i> </a>
+                                    <a href="{{url('/admin/delete-category/'.$category->id)}}" class="btn btn-danger btn-sm" ><i class="fa fa-trash-o"></i> </a>
                                  </td>
                               </tr>
                            @endforeach
