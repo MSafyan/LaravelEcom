@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title',"View Product")
+@section('title',"View Categories")
 @section('content')
 <!-- Content Wrapper. Contains page content -->
    <div class="content-wrapper">
@@ -9,8 +9,8 @@
             <i class="fa fa-users"></i>
          </div>
          <div class="header-title">
-            <h1>View Product</h1>
-            <small>Product List</small>
+            <h1>View Categories</h1>
+            <small>Category List</small>
          </div>
       </section>
           @if(Session::has('flash_message_error'))
@@ -42,16 +42,16 @@
                <div class="panel panel-bd lobidrag">
                   <div class="panel-heading">
                      <div class="btn-group" id="buttonexport">
-                        <a href="{{url('/admin/view-products')}}">
-                           <h4>Add Product</h4>
+                        <a href="{{url('/admin/view-categs')}}">
+                           <h4>View Category</h4>
                         </a>
                      </div>
                   </div>
                   <div class="panel-body">
                   <!-- Plugin content:powerpoint,txt,pdf,png,word,xl -->
-                     <div class="btn-group">
+                    <div class="btn-group">
                         <div class="buttonexport" id="buttonlist"> 
-                        <a class="btn btn-add" href="{{url('/admin/add-product')}}"> <i class="fa fa-plus"></i> Add Product
+                        <a class="btn btn-add" href="{{url('/admin/add-category')}}"> <i class="fa fa-plus"></i> Add Category
                            </a>  
                         </div>
                        
@@ -62,39 +62,29 @@
                            <thead>
                               <tr class="info">
                                 <th>ID</th>
-                                 <th>Product Name</th>
-                                 <th>Category ID</th>
-                                 <th>Product Code</th>
-                                 <th>Product Color</th>
-                                 <th>Image</th>
-                                 <th>Price</th>
+                                 <th>Category Name</th>
+                                 <th>Product ID</th>
+                                
+                                 <th>Url</th>
                                  <th>Status</th>
                                  <th>Action</th>
                               </tr>
                            </thead>
                            <tbody>
-                             @foreach($products as $product)
+                             @foreach($categories as $category)
                               <tr>
-                              <td>{{$product->id}}</td>
+                              <td>{{$category->id}}</td>
                                 <td>
-                                  {{$product->name}}
+                                  {{$category->name}}
                                 </td>
-                                <td>{{$product->category_id}}</td>
-                                <td>{{$product->code}}</td>
-                                <td>{{$product->color}}</td>
-                                @if(!empty($product->image))
-                                  <td>
-                                    <img src="{{asset('/uploads/products/'.$product->image)}}" ="User Image" style="width:100px;"> </td>
-                                    @endif
-                                  <td>{{$product->price}}</td>
-                                 <td>
-                                 <input type="checkbox" class="ProductStatus btn btn-success" rel="{{$product->id}}" data-toggle="toggle" data-on="Enabled" data-of="Disabled" data-onstyle="success"data-offstyle="danger" @if($product['status']=="1") checked @endif>
-                                <div id="myElem" style="display:none;" class="alert alert-success">Status Enabled</div>
-                                </td>
+                                <td>{{$category->parent_id}}</td>
+                                <td>{{$category->url}}</td>
+                                <td>{{$category->status}}</td>
+                              
                                 <td>
-                                    <a href="{{url('/admin/edit-product/'.$product->id)}}"
+                                    <a href="{{url('/admin/edit-category/'.$category->id)}}"
                                     class="btn btn-add btn-sm" ><i class="fa fa-pencil"></i></a>
-                                    <a href="{{url('/admin/delete-product/'.$product->id)}}" class="btn btn-danger btn-sm" ><i class="fa fa-trash-o"></i> </a>
+                                    <a href="{{url('/admin/delete-product/'.$category->id)}}" class="btn btn-danger btn-sm" ><i class="fa fa-trash-o"></i> </a>
                                  </td>
                               </tr>
                            @endforeach

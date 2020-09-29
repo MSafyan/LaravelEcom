@@ -19,10 +19,23 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware'=>['auth']],function(){
   Route::match(['get','post'],'/admin/dashboard','AdminController@dashboard');
+
+
+//Category
+Route::match(['get','post'],'/admin/add-category','CategoryController@addCategory');
+Route::match(['get','post'],'/admin/view-categories','CategoryController@viewCategories');
+Route::match(['get','post'],'/admin/edit-category/{id}','CategoryController@editCategory');
+Route::match(['get','post'],'/admin/delete-category/{id}','CategoryController@deleteCategory');
+
+
+
+
+  //Proudct
   Route::match(['get','post'],'/admin/add-product','ProductsController@addProduct');
   Route::match(['get','post'],'/admin/view-products','ProductsController@viewProducts');
   Route::match(['get','post'],'/admin/edit-product/{id}','ProductsController@editProduct');
   Route::match(['get','post'],'/admin/delete-product/{id}','ProductsController@deleteProduct');
+  Route::post('/admin/update-product-status','ProductsController@updateStatus');
 
 });
 

@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+@section('title',"Edit Product")
 @section('content')
 
  <!-- Content Wrapper. Contains page content -->
@@ -48,6 +49,12 @@
               </div>
               <div class="panel-body">
               <form class="col-sm-6" enctype="multipart/form-data" action="{{url('/admin/edit-product/'.$productDetails->id)}}" method="post">{{csrf_field()}}
+                  <div class="form-group">
+                       <label>Under Category</label>
+                       <select name="category_id" id="category_id" class="form-control">
+                        <?php echo $categories_dropdown; ?>
+                      </select> 
+                    </div>
                     <div class="form-group">
                        <label>Product Name</label>
                        <input type="text" class="form-control" placeholder="Enter Product Name..." 

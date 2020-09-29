@@ -6,7 +6,8 @@
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>CRM Admin Panel</title>
+      <title>@yield('title') - WayShop</title>
+<meta name="csrf-token" content="{{csrf_token()}}">
       <!-- Favicon and touch icons -->
       <link rel="shortcut icon" href="{{ asset('admin-assets/dist/img/ico/favicon.png')}}" type="image/x-icon">
       <!-- Start Global Mandatory Style
@@ -101,13 +102,10 @@
       <script src="{{ asset('admin-assets/dist/js/dashboard.js')}}" type="text/javascript"></script>
 
       <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+      @include('sweetalert::alert')
       <!-- End Theme label Script
          =====================================================================-->
-         <script>
-            $(document).ready( function () {
-                $('#table_id').DataTable();
-            } );
-         </script>
+       
       <script>
          function dash() {
          // single bar chart
@@ -188,5 +186,53 @@
          }
          dash();         
       </script>
+      <script>
+          $(document).ready(function(){
+            $('#table_id').DataTable();
+            $(".ProductStatus").change(function(){
+              var id = $(this).attr('rel');
+
+              if(($this).prop("checked")==true){
+                $.ajax({
+                  headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  },
+                  type:'post',
+                  url:'/admin/update-product-success',
+                  data: {status:'1',id:id},
+                  success:function(data){
+                    $("#message_success").show();
+                    setTimeout(function(){
+                      $("#message_success").fadeout('slow');
+                    },2000);
+                  },error:function(){
+                    alert("Error")
+                  }
+                });
+              }else{
+                $.ajax({
+                  headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  },
+                  type:'post',
+                  url:'/admin/update-product-success',
+                  data: {status:'0',id:id},
+                  success:function(resp){
+                    $("#message_error").show();
+                    setTimeout(function(){
+                      $("#message_error").fadeout('slow');
+                    },2000);
+                  },error:function(){
+                    alert("Error")
+                  }
+                });
+              }
+            })
+          })
+          </script> 
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
    </body>
 </html>
